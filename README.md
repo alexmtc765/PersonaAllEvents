@@ -1,4 +1,4 @@
-# PersonaEventToFlow
+# PersonaAllEvents
 A terrible Python script that generates flow and msg files that run every event it can find in Persona 5's files.
 
 ## How does it work?
