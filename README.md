@@ -11,7 +11,7 @@ It runs the events it found in the order that it found them.
 I couldnt find a list of every event in the game. The only list I found was this incomplete one https://amicitia.miraheze.org/wiki/Event_(P5).
 
 ## What do I need to run the script?
-https://www.python.org/
+https://www.python.org/ and a copy of Persona 5
 
 ## How do I compile the FlowScript?
 https://github.com/tge-was-taken/Atlus-Script-Tools
