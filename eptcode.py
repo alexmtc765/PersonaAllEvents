@@ -75,7 +75,7 @@ def codeFilter(): #filters the base txt into a persona 5 flow code file
             fout.write(line)
 
     infile = "fifth_pass.txt"
-    outfile = "code.txt"
+    outfile = "flow.txt"
     delete_list = ["nd"]
     with open(infile) as fin, open(outfile, "w+") as fout:
         for line in fin:

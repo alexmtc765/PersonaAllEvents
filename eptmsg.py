@@ -62,7 +62,6 @@ def msgFilter():  #filters the base txt into a persona 5 msg code file
                 line = line.replace(word, "_")
             fout.write(line)
     
-
 def removeTemp(): # removes temp files used for filtering
     os.remove("first_pass.txt")
     os.remove("second_pass.txt")
