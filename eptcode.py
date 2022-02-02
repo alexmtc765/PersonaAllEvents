@@ -2,8 +2,9 @@ import os
 
 def makeBase(): #makes a base txt file with the pak file names and some markers for the filtering
 
+    events_folder = "path_to_events_folder" #put the path to where your persona 5 events folder is (it might have to be on a different drive then where the script is being run cuz of how bad it is)
     with open('PAKs.txt', 'w') as f:
-        for root, dirs, files in os.walk("G:\Emulation\Ps3\Event"):
+        for root, dirs, files in os.walk(events_folder):
             for file in files:
                 if file.endswith(".PAK"): #puts the stuff into a txt file
                     f.write("disp")
@@ -13,7 +14,7 @@ def makeBase(): #makes a base txt file with the pak file names and some markers 
                     print(os.path.join(file))
                     f.write(os.path.join(file))
                     f.write('\n')
-                    
+
 def codeFilter(): #filters the base txt into a persona 5 flow code file
 
     #everything under here just filters the names so that its code 
@@ -64,8 +65,10 @@ def codeFilter(): #filters the base txt into a persona 5 flow code file
     with open(infile) as fin, open(outfile, "w+") as fout:
         for line in fin:
             roundmsg = round(msgNum) #round the stupid number
+            roundmsg = str(roundmsg)
+            msgstr = "_" + roundmsg
             for word in delete_list:
-                line = line.replace(word,str(roundmsg)) 
+                line = line.replace(word,msgstr) 
             if (line.find(word)):
                 msgNum += 0.333333333333333333
                 
@@ -88,3 +91,9 @@ def removeTemp(): # removes temp files used for filtering
     os.remove("fifth_pass.txt")
     os.remove("PAKs.txt")
 
+def main():
+    makeBase()
+    codeFilter()
+    removeTemp()
+
+main()
