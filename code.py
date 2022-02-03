@@ -94,6 +94,7 @@ def removeTemp(): # removes temp files used for filtering
     os.remove("forth_pass.txt")
     os.remove("fifth_pass.txt")
     os.remove("PAKs.txt")
+    os.rename("flow.txt", "flow.flow")
 
 def main():
     makeBase()

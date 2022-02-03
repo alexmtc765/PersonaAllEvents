@@ -71,6 +71,7 @@ def removeTemp(): # removes temp files used for filtering
     os.remove("second_pass.txt")
     os.remove("third_pass.txt")
     os.remove("PAKs.txt")
+    os.rename("msg.txt", "msg.msg")
 
 def main():
     makeBase()
