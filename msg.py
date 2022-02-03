@@ -71,7 +71,21 @@ def removeTemp(): # removes temp files used for filtering
     os.remove("second_pass.txt")
     os.remove("third_pass.txt")
     os.remove("PAKs.txt")
-    os.rename("msg.txt", "msg.msg")
+    if (os.path.isfile('msg.msg') == False):
+        os.rename("msg.txt", "msg.msg")
+    else: 
+        replace = input("Would you like to replace the existing msg.msg file? (Y/N)")
+        if (replace == "Y" or replace == "y"):
+            os.remove("msg.msg")
+            os.rename("msg.txt", "msg.msg")
+            print("Replace Finished")
+        elif (replace == "N" or replace == "n"):
+            os.remove("msg.txt")
+            print("Replace Cancelled")
+        else:
+            print("error, input not Y or N")
+    
+
 
 def main():
     makeBase()

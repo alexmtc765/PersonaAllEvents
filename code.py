@@ -8,6 +8,7 @@ def makeBase(): #makes a base txt file with the pak file names and some markers 
 
     events_folder = getEVTpath()
     with open('PAKs.txt', 'w') as f:
+        f.write('void CallAllEvts()\n{\n')
         for root, dirs, files in os.walk(events_folder):
             for file in files:
                 if file.endswith(".PAK"): #puts the stuff into a txt file
@@ -18,6 +19,7 @@ def makeBase(): #makes a base txt file with the pak file names and some markers 
                     print(os.path.join(file))
                     f.write(os.path.join(file))
                     f.write('\n')
+        f.write('}')
 
 def codeFilter(): #filters the base txt into a persona 5 flow code file
 
@@ -49,7 +51,7 @@ def codeFilter(): #filters the base txt into a persona 5 flow code file
     with open(infile) as fin, open(outfile, "w+") as fout:
         for line in fin:
             for word in delete_list:
-                line = line.replace(word, "CALL_EVENT(")
+                line = line.replace(word, "    CALL_EVENT(")
             fout.write(line)
 
     infile = "third_pass.txt"
@@ -58,7 +60,7 @@ def codeFilter(): #filters the base txt into a persona 5 flow code file
     with open(infile) as fin, open(outfile, "w+") as fout:
         for line in fin:
             for word in delete_list:
-                line = line.replace(word,"MSG_WND_DSP();\nMSG_MIND(")
+                line = line.replace(word,"    MSG_WND_DSP();\n    MSG_MIND(")
             fout.write(line)
 
     infile = "forth_pass.txt"
@@ -84,7 +86,7 @@ def codeFilter(): #filters the base txt into a persona 5 flow code file
     with open(infile) as fin, open(outfile, "w+") as fout:
         for line in fin:
             for word in delete_list:
-                line = line.replace(word,", 0 );\nMSG_WND_CLS();")
+                line = line.replace(word,", 0 );\n    MSG_WND_CLS();")
             fout.write(line)
 
 def removeTemp(): # removes temp files used for filtering
@@ -94,7 +96,20 @@ def removeTemp(): # removes temp files used for filtering
     os.remove("forth_pass.txt")
     os.remove("fifth_pass.txt")
     os.remove("PAKs.txt")
-    os.rename("flow.txt", "flow.flow")
+    if (os.path.isfile('flow.flow') == False):
+        os.rename("flow.txt", "flow.flow")
+    else: 
+        replace = input("Would you like to replace the existing flow.flow file? (Y/N)")
+        if (replace == "Y" or replace == "y"):
+            os.remove("flow.flow")
+            os.rename("flow.txt", "flow.flow")
+            print("Replace Finished")
+        elif (replace == "N" or replace == "n"):
+            os.remove("flow.txt")
+            print("Replace Cancelled")
+        else:
+            print("error, input not Y or N")
+    
 
 def main():
     makeBase()
