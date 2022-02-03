@@ -1,8 +1,12 @@
 import os
 
+def getEVTpath():
+    evt_fld = input("Enter events path:\n")
+    return evt_fld
+
 def makeBase(): #makes a base txt file with the pak file names and some markers for the filtering
 
-    events_folder = "path_to_events_folder" #put the path to where your persona 5 events folder is (it might have to be on a different drive then where the script is being run cuz of how bad it is)
+    events_folder = getEVTpath()
     with open('PAKs.txt', 'w') as f:
         for root, dirs, files in os.walk(events_folder):
             for file in files:
